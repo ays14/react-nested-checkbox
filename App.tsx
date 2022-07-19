@@ -125,11 +125,21 @@ export default function App() {
 
       const immediateChilds = node?.children;
       if (immediateChilds) {
-        immediateChilds.forEach(c => findActiveNodes(c));
-        
-        if (immediateChilds.reduce((prev, curr) => prev && currentNodeStates[curr.value], true)) {
+        immediateChilds.forEach((c) => findActiveNodes(c));
+
+        if (
+          immediateChilds.reduce(
+            (prev, curr) => prev && currentNodeStates[curr.value],
+            true
+          )
+        ) {
           currentNodeStates[node.value] = true;
-        } else if (!immediateChilds.reduce((prev, curr) => prev || currentNodeStates[curr.value], false)) {
+        } else if (
+          !immediateChilds.reduce(
+            (prev, curr) => prev || currentNodeStates[curr.value],
+            false
+          )
+        ) {
           currentNodeStates[node.value] = false;
         } else if (!checked) {
           currentNodeStates[node.value] = false;
