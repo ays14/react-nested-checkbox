@@ -70,7 +70,7 @@ export default function App() {
 
       for (let i = 1; i < nodes.length; ++i) {
         currNode = children.find((u) => u.value === nodes[i]);
-        children = currNode && currNode.children ? currNode.children : [];
+        children = currNode?.children ? currNode.children : [];
       }
       // now currNode contains the clicked node
       let nodesToUpdate = [];
@@ -92,8 +92,6 @@ export default function App() {
         currentNodeStates[node.value] = checked;
       }
     }
-
-    setCheckNodes(currentNodeStates);
 
     // traverse all and update indeterminateStates
     const findIndeterminateNodes = (node: any) => {
@@ -121,9 +119,28 @@ export default function App() {
         indeterminateStates[node.value] = anyCheckChild >= 0;
       }
     };
+
+    const findActiveNodes = (node: any) => {
+      if (!node) return;
+
+      const immediateChilds = node?.children;
+      if (immediateChilds) {
+        immediateChilds.forEach(c => findActiveNodes(c));
+        
+        if (immediateChilds.reduce((prev, curr) => prev && currentNodeStates[curr.value], true)) {
+          currentNodeStates[node.value] = true;
+        } else if (!immediateChilds.reduce((prev, curr) => prev || currentNodeStates[curr.value], false)) {
+          currentNodeStates[node.value] = false;
+        } else if (!checked) {
+          currentNodeStates[node.value] = false;
+        }
+      }
+    };
+    findActiveNodes(newNodes);
     findIndeterminateNodes(newNodes);
 
     setIndeterminateNodes(indeterminateStates);
+    setCheckNodes(currentNodeStates);
   };
 
   const renderCheckBox = (node: any) => {
