@@ -1,0 +1,17 @@
+.level {
+  padding: 0;
+  margin: 0 0 0 12px;
+}
+
+.panel {
+  padding: 0;
+  margin: 0;
+}
+
+.no-child-level {
+  margin-left: 0;
+}
+
+.no-child-panel {
+  margin-left: 12px;
+}
