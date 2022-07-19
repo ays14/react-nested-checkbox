@@ -1,6 +1,6 @@
 .level {
   padding: 0;
-  margin: 0 0 0 12px;
+  margin: 0 0 0 18px;
 }
 
 .panel {
@@ -9,9 +9,19 @@
 }
 
 .no-child-level {
-  margin-left: 0;
+  /* margin-left: 0; */
 }
 
 .no-child-panel {
-  margin-left: 12px;
+  margin-left: 24px;
+}
+
+.ant-collapse-header {
+  margin: 0;
+  padding: 8px 0 !important;
+}
+
+.ant-collapse-content-box {
+  margin: 0;
+  padding: 0 0 !important;
 }
